@@ -1,0 +1,42 @@
+/* @font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/opensans-regular-webfont.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'codystarlight';
+    src: url('/fonts/codystar-light-webfont.woff') format('woff');
+}
+
+Unfortunately, this doesn't seem to work without webpack tweaks
+*/
+
+
+.App {
+  text-align: center;
+  color: #b7ffda;
+  font-size: 2em;
+  font-family: sans;
+}
+
+h1 {
+  margin-top: 20vh;
+  font-size: 5em;
+  font-weight: 100;
+  transition: 1s;
+}
+
+#loadBook {
+  margin: auto;
+  width: 90vw;
+  padding: .3em;
+  border-top: 1px solid #b7ffda;
+  border-bottom: 1px solid #b7ffda;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.white {
+  color: white;
+  border-color: white !important;
+}
