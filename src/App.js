@@ -6,7 +6,7 @@ const fs = remote.require('fs-extra');
 const dialog = remote.dialog;
 const DecompressZip = window.require('decompress-zip');
 
-let extracted = {}, dest = "";
+let htmlFilePaths = [], extracted = {}, dest = "";
 
 remote.getCurrentWindow().on("close", () => {
     let toRem = Object.keys(extracted);
@@ -53,22 +53,26 @@ class App extends Component {
                if(fileNames === undefined) {
                   console.log("No file selected");
                } else {
-                  parser.open(fileNames[0], function (err, epubData) {
+                  dest = fileNames[0];
+                  parser.open(dest, function (err, epubData) {
                     if(err) return console.log(err);
                     for (let filePath in epubData.easy.itemHashByHref) {
                       if (filePath.substr(filePath.length-4) === "html") {
-                        // console.log(filePath);
+                        htmlFilePaths.push(dest + filePath);
                       }
                     }
                   });
                   /* Extract File */
                   let i, unzipper = new DecompressZip(fileNames[0]);
-                  dest = fileNames[0]
 
                   for (i = dest.length-1; i>0; i--) {
                     if (dest[i-1] === '/') break;
                   }
                   dest = dest.substr(0, i);
+                  unzipper.on('extract', () => {
+                    console.log('change window?')
+                    //remote.getCurrentWindow().loadURL(`file://${__dirname}/src/test.html`);
+                  });
                   unzipper.extract({
                     path: dest,
                     filter: file => {
@@ -80,7 +84,6 @@ class App extends Component {
                       return true;
                     }
                   });
-
                }
             });
           }}>
