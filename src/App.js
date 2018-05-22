@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/App.css';
 const dialog = window.require('electron').remote.dialog;
+const parser = window.require('epub-parser');
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +39,15 @@ class App extends Component {
                   console.log("No file selected");
                } else {
                   console.log(fileNames[0]);
+                  parser.open(fileNames[0], function (err, epubData) {
+                    if(err) return console.log(err);
+                    console.log(epubData.easy);
+                    for (let filePath in epubData.easy.itemHashByHref) {
+                      if (filePath.substr(filePath.length-4) === "html") {
+                        console.log(filePath);
+                      }
+                    }
+                  });
                }
             });
           }}>

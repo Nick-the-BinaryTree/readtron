@@ -8,6 +8,7 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "epub-parser": "^0.2.5",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
   },
