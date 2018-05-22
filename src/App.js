@@ -31,11 +31,13 @@ class App extends Component {
           onMouseEnter={() => this.alterColor(1)}
           onMouseOut={() => this.alterColor(0)}
           onClick={() => {
-            dialog.showOpenDialog(fileNames => {
+            dialog.showOpenDialog(
+            { filters: [{ name: "EPUB", extensions: ["epub"] }] },
+            fileNames => {
                if(fileNames === undefined) {
                   console.log("No file selected");
                } else {
-                  console.log("Sweet")
+                  console.log(fileNames[0]);
                }
             });
           }}>
