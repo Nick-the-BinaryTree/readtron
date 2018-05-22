@@ -7,14 +7,15 @@ const dialog = remote.dialog;
 const DecompressZip = window.require('decompress-zip');
 
 let extracted = {}, dest = "";
-document.onkeypress = function (e) {
+
+remote.getCurrentWindow().on("close", () => {
     let toRem = Object.keys(extracted);
 
     for (let i=0; i<toRem.length; i++) {
       let path = dest + toRem[i];
       fs.remove(path);
     }
-};
+});
 
 class App extends Component {
   constructor(props) {
