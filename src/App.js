@@ -29,12 +29,14 @@ class App extends Component {
     this.button = React.createRef();
     this.webview = React.createRef();
   }
+
   componentWillMount() {
     document.addEventListener("keydown", this.handleKeyDown);
   }
   componentWillUnmount() {
     document.addEventListener("keydown", this.handleKeyDown);
   }
+
   handleKeyDown (e) {
     if (this.state.page === -1) return;
     if (e.keyCode === 39 && this.state.page < htmlFilePaths.length) {
@@ -45,6 +47,7 @@ class App extends Component {
       this.setState({page: this.state.page-1})
     }
   }
+
   alterColor (light) {
     if (this.header && this.button) {
       if (light) {
@@ -56,6 +59,7 @@ class App extends Component {
       }
     }
   }
+  
   render() {
     return (
       <div className="App">
@@ -67,7 +71,7 @@ class App extends Component {
             onClick={() => {
               /* Open File */
               dialog.showOpenDialog(
-              { filters: [{ name: "EPUB", extensions: ["epub"] }] },
+              { filters: [{ name: "ePub", extensions: ["epub"] }] },
               fileNames => {
                  if(fileNames === undefined) {
                     console.log("No file selected");
@@ -109,6 +113,11 @@ class App extends Component {
               });
             }}>
             Load Book
+          </div>
+          <div id="footer">
+            Use arrow keys to navigate
+            <br />
+            Works best with ePub files from Project Gutenburg
           </div>
         </div>
         <webview ref={this.webview}></webview>
